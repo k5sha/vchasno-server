@@ -6,7 +6,7 @@ from tabulate import tabulate
 
 scripts, test_path, config_path = argv
 
-# Тестовые данные и ожидаемые результаты
+# Тестові дані та їх результат
 test_cases = []
 
 
