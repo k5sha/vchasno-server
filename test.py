@@ -1,2 +1,3 @@
-print(str(int(input()) + 1))
-print(str(int(input()) + 1))
+print(int(input())+1)
+print(int(input())+1)
+print('Test')
