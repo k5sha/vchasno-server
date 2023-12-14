@@ -1,0 +1,65 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Float!
+  username: String!
+  password: String!
+  rooms: [Room!]
+}
+
+type Room {
+  id: Int!
+  title: String!
+  type: String
+  ownerId: Int!
+  owner: User
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
+}
+
+type Query {
+  rooms: [Room!]!
+  getRoom(id: Int!): Room!
+  users: [User!]!
+  user(id: Int!): User!
+}
+
+type Mutation {
+  createRoom(createRoomInput: CreateRoomInput!): Room!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  signup(signupUserInput: SignupUserInput!): User!
+}
+
+input CreateRoomInput {
+  title: String!
+  type: String
+  ownerId: Int!
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  username: String
+  password: String
+}
+
+input LoginUserInput {
+  username: String!
+  password: String!
+}
+
+input SignupUserInput {
+  username: String!
+  password: String!
+}

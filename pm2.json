@@ -1,0 +1,10 @@
+{
+    "apps": [
+        {
+            "name": "itester-server",
+            "cwd": "./itester-server",
+            "script": "npm",
+            "args": "run start:dev"
+        }
+    ]
+}
