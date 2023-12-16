@@ -11,6 +11,8 @@ import { RoomsService } from './rooms.service';
 import { Room } from './room.entity';
 import { CreateRoomInput } from './dto/create-room.input';
 import { User } from 'src/users/entities/user.entity';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Resolver(() => Room)
 export class RoomsResolver {
@@ -30,6 +32,8 @@ export class RoomsResolver {
   owner(@Parent() room: Room): Promise<User> {
     return this.roomService.getOwner(room.id);
   }
+
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Room)
   createRoom(
     @Args('createRoomInput') createRoomInput: CreateRoomInput,
