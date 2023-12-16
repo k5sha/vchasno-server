@@ -1,73 +1,189 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## Технічне завдання для проєкту "Itester":
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Основна ідея проєкту:
+Створення платформи для тестування учнів у сфері інформаційних технологій (IT).
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Функціональні вимоги:
 
-## Description
+**1. Реєстрація вчителів:**
+   - Можливість реєстрації вчителів з використанням особистого облікового запису.
+   - Зберігання базової інформації про вчителя (ім'я, електронна пошта та інше).
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**2. Створення кімнат:**
+   - Вчителі можуть створювати кімнати для тестування.
+   - Генерація унікального коду доступу до кімнати для учнів.
 
-## Installation
+**3. Учнівські облікові записи:**
+   - Можливість реєстрації учнів і приєднання до кімнати за кодом доступу вчителя.
 
-```bash
-$ npm install
-```
+**4. Вікно редагування коду для учня:**
+   - Відображення завдання, яке вказав вчитель.
+   - Використання редактора Monaco для введення коду студентами.
+   - Наявність кнопки "Запустити", яка дозволяє учневі виконати свій код та перевірити його результат.
+   - Відображення виводу виконаного коду для самоперевірки учнем.
 
-## Running the app
+**5. Кнопка "Відправити" для учня:**
+   - Після написання коду учень може використовувати кнопку "Відправити" для перевірки та відправлення коду вчителю.
+   - Перед відправленням коду учня вчителеві, система автоматично оцінює його результат та встановлює попередній бал.
+   - Можливість вчителю внести корективи в оцінку або залишити коментарі до коду учня.
 
-```bash
-# development
-$ npm run start
+**6. Редактор для вчителя:**
+   - Вчителі мають доступ до спеціального редактора для перегляду та оцінювання коду учнів.
+   - Можливість внесення змін до оцінки та надсилання зауважень чи рекомендацій учням.
 
-# watch mode
-$ npm run start:dev
+**7. Перевірка коду за допомогою Judge0:**
+   - Код учнів компілюється за допомогою Judge0.
+   - Створення окремої функції для порівняння результатів виконання скомпільованого коду з очікуваними даними, які вказав вчитель.
 
-# production mode
-$ npm run start:prod
-```
+**8. Кешування з Redis та Apollo:**
+   - Використання Redis для кешування часто використовуваних запитів та результатів тестування.
+   - Імплементація Apollo Cache для зберігання даних на клієнтській стороні та зменшення навантаження на сервер.
 
-## Test
+**9. Frontend технології:**
+   - Реєстрація і вхід в систему вчителів та учнів.
+   - Інтерфейс для створення кімнат та додавання завдань вчителями.
+   - Розділ для приєднання до кімнат та введення коду учнями.
+   - Відображення результатів тестування та видача балів.
+   - Вікно редагування коду для учня з вказаним завданням та кнопками "Запустити" і "Відправити".
+   - Редактор для вчителя для перегляду, оцінювання та комунікації з учнями.
 
-```bash
-# unit tests
-$ npm run test
+**10. Backend технології:**
+    - Використання Node.js та Nest.js для серверної частини.
+    - Використання GraphQL для обміну даними між клієнтом та сервером.
+    - Зберігання даних в MySQL базі даних для ефективного управління інформацією про вчителів, учнів, кімнати та результати тестувань.
 
-# e2e tests
-$ npm run test:e2e
 
-# test coverage
-$ npm run test:cov
-```
+**11. Система контролю версій:**
+    - Використання GitHub для управління версіями коду та спільної роботи над проєктом.
+    - Зберігання коду у репозиторії та використання гілок для розробки нового функціоналу, виправлення помилок та підтримки стабільної версії.
 
-## Support
+**12. Деплоймент та моніторинг:**
+    - Конфігурація Nginx для обслуговування клієнтських запитів та забезпечення безпеки.
+    - Запуск застосунку за допомогою PM2 для ефективного управління процесами та автоматичного перезавантаження в разі збоїв.
+    - Використання моніторингових інструментів, таких як Prometheus або Grafana, для відстеження використання ресурсів та виявлення проблем в реальному часі.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+**Тестування:**
+1. Перевірка правильності створення кімнат та реєстрації вчителів та учнів.
+2. Валідація функціоналу редагування коду для учнів та його взаємодії з Judge0.
+3. Тестування системи кешування Redis та Apollo для забезпечення ефективності та швидкодії.
+4. Впевнення в коректності відправлення та прийому даних між frontend та backend через GraphQL.
+5. Валідація назв commit і pull для системи контролю версій та забезпечення правильності роботи на GitHub.
+6. Моніторинг роботи застосунку та виявлення можливих проблем
 
-## Stay in touch
+### Пояснення 
+**Frontend технології:**
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+1. **Vue.js:**
+   - Використовується для розробки динамічних інтерфейсів користувача.
+   - Забезпечує зручну та ефективну роботу з DOM та компонентами.
 
-## License
+2. **Apollo Client:**
+   - Використовується для роботи з GraphQL на стороні клієнта.
+   - Забезпечує управління даними та роботу з кешем для ефективного взаємодії з сервером.
 
-Nest is [MIT licensed](LICENSE).
+3. **Vuex:**
+   - Використовується для управління станом додатку в Vue.js.
+   - Дозволяє централізовано зберігати стан і здійснювати зміни відразу в багатьох частинах додатку.
+
+4. **Monaco Editor:**
+   - Використовується для інтеграції редактора коду в інтерфейс користувача.
+   - Надає можливість зручного редагування та виконання коду.
+
+**Backend технології:**
+
+5. **Node.js:**
+   - Використовується для створення серверної частини додатку.
+   - Забезпечує швидке та ефективне виконання JavaScript на сервері.
+
+6. **Nest.js:**
+   - Використовується як фреймворк для створення масштабованих та модульних серверних додатків.
+   - Забезпечує структуру проєкту та використовує концепції, що покращують ефективність розробки.
+
+7. **GraphQL:**
+   - Використовується для організації взаємодії між клієнтом та сервером.
+   - Дозволяє ефективно передавати лише необхідні дані та зменшувати кількість запитів.
+
+8. **MySQL:**
+   - Використовується для зберігання даних про вчителів, учнів, кімнати та результати тестувань.
+   - Забезпечує надійність та ефективність управління базою даних.
+
+9. **Redis:**
+   - Використовується для кешування часто використовуваних запитів та результатів тестувань.
+   - Допомагає покращити швидкодію додатку та зменшити навантаження на сервер.
+
+10. **Apollo Server:**
+    - Використовується для створення серверної частини, яка обробляє запити GraphQL.
+    - Дозволяє легко інтегрувати GraphQL з існуючими серверними додатками.
+
+**Система контролю версій та Деплоймент:**
+
+11. **GitHub:**
+    - Використовується для управління версіями коду та спільної роботи розробників над проєктом.
+
+12. **Nginx:**
+    - Використовується для обслуговування клієнтських запитів та забезпечення безпеки.
+    - Допомагає забезпечити стабільність та швидкодію додатку через правильну конфігурацію.
+
+13. **PM2:**
+    - Використовується для ефективного управління процесами застосунку та автоматичного перезавантаження в разі збоїв.
+    -
+14.  **Prometheus або Grafana:**
+    -   Використовуються для моніторингу роботи застосунку та виявлення можливих проблем в реальному часі.
+    - 
+### Посилання
+
+**Frontend технології:**
+
+1. **Vue.js:**
+   - [Vue.js](https://vuejs.org/)
+
+2. **Apollo Client:**
+   - [Apollo Client](https://www.apollographql.com/docs/react/)
+
+3. **Vuex:**
+   - [Vuex](https://vuex.vuejs.org/)
+
+4. **Monaco Editor:**
+   - [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+
+**Backend технології:**
+
+5. **Node.js:**
+   - [Node.js](https://nodejs.org/)
+
+6. **Nest.js:**
+   - [Nest.js](https://nestjs.com/)
+
+7. **GraphQL:**
+   - [GraphQL](https://graphql.org/)
+
+8. **MySQL:**
+   - [MySQL](https://www.mysql.com/)
+
+9. **Redis:**
+   - [Redis](https://redis.io/)
+
+10. **Apollo Server:**
+    - [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
+
+**Система контролю версій та Деплоймент:**
+
+11. **GitHub:**
+    - [GitHub](https://github.com/)
+
+12. **Nginx:**
+    - [Nginx](https://nginx.org/)
+
+13. **PM2:**
+    - [PM2](https://pm2.keymetrics.io/)
+
+**Компіляція та моніторинг:**
+
+14. **Prometheus:**
+    - [Prometheus](https://prometheus.io/)
+
+15. **Grafana:**
+    - [Grafana](https://grafana.com/)
+
+16. **Judge0:**
+    - [Judge0](https://judge0.com/)
