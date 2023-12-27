@@ -22,11 +22,23 @@ type LoginResponse {
   user: User!
 }
 
+type SignUpResponse {
+  access_token: String!
+  user: User!
+}
+
+type Role {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   rooms: [Room!]!
   getRoom(id: Int!): Room!
   users: [User!]!
   user(id: Int!): User!
+  roles: [Role!]!
+  role(id: Int!): Role!
 }
 
 type Mutation {
@@ -35,7 +47,10 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
   login(loginUserInput: LoginUserInput!): LoginResponse!
-  signup(signupUserInput: SignupUserInput!): User!
+  signup(signupUserInput: SignupUserInput!): SignUpResponse!
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  updateRole(updateRoleInput: UpdateRoleInput!): Role!
+  removeRole(id: Int!): Role!
 }
 
 input CreateRoomInput {
@@ -62,4 +77,15 @@ input LoginUserInput {
 input SignupUserInput {
   username: String!
   password: String!
+}
+
+input CreateRoleInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateRoleInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

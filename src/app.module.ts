@@ -10,6 +10,10 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { RequestLoggerMiddleware } from './middleware/request-logger.middleware';
+import { RolesModule } from './roles/roles.module';
+import { FormsModule } from './forms/forms.module';
+import { SubjectsModule } from './subjects/subjects.module';
+import { LessonsModule } from './lessons/lessons.module';
 
 @Module({
   imports: [
@@ -30,6 +34,10 @@ import { RequestLoggerMiddleware } from './middleware/request-logger.middleware'
     RoomsModule,
     UsersModule,
     AuthModule,
+    RolesModule,
+    FormsModule,
+    SubjectsModule,
+    LessonsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

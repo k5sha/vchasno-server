@@ -29,13 +29,17 @@ export class AuthService {
     return null;
   }
 
+  private async createToken(user: User) {
+    return await this.jwtService.sign({
+      sub: user.id,
+      username: user.username,
+    });
+  }
+
   async login(user: User): Promise<LoginResponse> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     return {
-      access_token: this.jwtService.sign({
-        sub: user.id,
-        username: user.username,
-      }),
+      access_token: await this.createToken(user),
       user,
     };
   }
@@ -51,9 +55,14 @@ export class AuthService {
 
     const password = await bcrypt.hash(signupUserInput.password, 10);
 
-    return this.usersService.create({
+    const createdUser = await this.usersService.create({
       ...signupUserInput,
       password,
     });
+
+    return {
+      access_token: await this.createToken(createdUser),
+      user: createdUser,
+    };
   }
 }

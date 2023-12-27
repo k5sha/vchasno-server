@@ -1,8 +1,8 @@
 {
     "apps": [
         {
-            "name": "itester-server",
-            "cwd": "./itester-server",
+            "name": "journal-server",
+            "cwd": "./journal-server",
             "script": "npm",
             "args": "run start:dev"
         }
