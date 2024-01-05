@@ -22,7 +22,7 @@ export class User {
 
   @Column()
   @Field()
-  fisrt_name: string;
+  first_name: string;
 
   @Column()
   @Field()
@@ -41,19 +41,19 @@ export class User {
   password: string;
 
   @OneToOne(() => userInfo)
-  @Field(() => userInfo)
+  @Field(() => userInfo, { nullable: true })
   userInfo: userInfo;
 
-  @ManyToMany(() => Role)
+  @ManyToMany(() => Role, { eager: true })
   @Field(() => [Role])
   @JoinTable()
   roles: Role[];
 
-  @OneToMany(() => Room, (room) => room.owner)
+  @OneToMany(() => Room, (room) => room.owner, { eager: true })
   @Field(() => [Room], { nullable: true })
   rooms?: Room[];
 
-  @OneToMany(() => Lesson, (lesson) => lesson.teacher)
+  @OneToMany(() => Lesson, (lesson) => lesson.teacher, { eager: true })
   @Field(() => [Lesson], { nullable: true })
   lessons?: Lesson[];
 }

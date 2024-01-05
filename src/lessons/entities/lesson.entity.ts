@@ -1,14 +1,15 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
-  JoinTable,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
-// TODO: theme entity
+// TODO: th eme entity
 @Entity()
 @ObjectType()
 export class Lesson {
@@ -20,8 +21,17 @@ export class Lesson {
   @Field()
   title: string;
 
+  @Column()
+  @Field(() => Int)
+  teacherId: number;
+
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.lessons)
-  @JoinTable()
   teacher: User;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

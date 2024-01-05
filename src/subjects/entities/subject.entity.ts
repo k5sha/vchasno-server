@@ -19,7 +19,7 @@ export class Subject {
   @Field()
   title: string;
 
-  @Field()
+  @Field(() => [User], { nullable: true })
   @ManyToMany(() => User)
   @JoinTable()
   teachers: User[];
