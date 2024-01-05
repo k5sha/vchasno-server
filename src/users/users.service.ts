@@ -4,15 +4,24 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { RolesService } from 'src/roles/roles.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private rolesService: RolesService,
   ) {}
-  create(createUserInput: CreateUserInput): Promise<User> {
-    const newUser = this.userRepository.create(createUserInput);
 
+  async create(createUserInput: CreateUserInput): Promise<User> {
+    const role = await this.rolesService.findOneByTitle('STUDENT');
+
+    if (!role) {
+      throw new Error('Role not exsist');
+    }
+
+    const newUser = this.userRepository.create(createUserInput);
+    newUser.roles = [role];
     return this.userRepository.save(newUser);
   }
 

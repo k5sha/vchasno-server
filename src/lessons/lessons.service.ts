@@ -1,26 +1,53 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLessonInput } from './dto/create-lesson.input';
-import { UpdateLessonInput } from './dto/update-lesson.input';
+import { Lesson } from './entities/lesson.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class LessonsService {
-  create(createLessonInput: CreateLessonInput) {
-    return 'This action adds a new lesson';
+  constructor(
+    @InjectRepository(Lesson) private lessonRepository: Repository<Lesson>,
+    private usersService: UsersService,
+  ) {}
+
+  async create(createLessonInput: CreateLessonInput): Promise<Lesson> {
+    const teacher = await this.usersService.findOneById(
+      createLessonInput.teacherId,
+    );
+
+    if (!teacher) {
+      throw new Error('Teacher not exist');
+    }
+
+    const lesson = await this.lessonRepository.findOne({
+      where: {
+        title: createLessonInput.title,
+        teacherId: createLessonInput.teacherId,
+      },
+    });
+
+    if (lesson) {
+      throw new Error('Lesson already exists!');
+    }
+
+    const newLesson = this.lessonRepository.create(createLessonInput);
+
+    return this.lessonRepository.save(newLesson);
+  }
+  findAll(): Promise<Lesson[]> {
+    return this.lessonRepository.find();
   }
 
-  findAll() {
-    return `This action returns all lessons`;
+  findOne(id: number): Promise<Lesson> {
+    return this.lessonRepository.findOne({
+      where: { id },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} lesson`;
-  }
-
-  update(id: number, updateLessonInput: UpdateLessonInput) {
-    return `This action updates a #${id} lesson`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} lesson`;
+  remove(id: number): number {
+    this.lessonRepository.delete(id);
+    return id;
   }
 }

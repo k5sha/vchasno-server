@@ -18,6 +18,8 @@ export class AuthService {
   ): Promise<Partial<User>> {
     const user = await this.usersService.findOneByUsername(username);
 
+    if (!user) return null;
+
     const valid = await bcrypt.compare(password, user?.password);
 
     if (user && valid) {
@@ -33,6 +35,7 @@ export class AuthService {
     return await this.jwtService.sign({
       sub: user.id,
       username: user.username,
+      roles: user.roles,
     });
   }
 
