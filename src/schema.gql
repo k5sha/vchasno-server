@@ -2,11 +2,33 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type userInfo {
+  id: Float!
+}
+
+type Role {
+  id: Float!
+  title: String!
+}
+
+type Lesson {
+  id: Float!
+  title: String!
+  teacherId: Int!
+  teacher: User!
+}
+
 type User {
   id: Float!
+  first_name: String!
+  second_name: String!
+  patronymic: String!
   username: String!
   password: String!
+  userInfo: userInfo
+  roles: [Role!]!
   rooms: [Room!]
+  lessons: [Lesson!]
 }
 
 type Room {
@@ -27,30 +49,47 @@ type SignUpResponse {
   user: User!
 }
 
-type Role {
-  """Example field (placeholder)"""
-  exampleField: Int!
+type Subject {
+  id: Float!
+  title: String!
+  teachers: [User!]
+}
+
+type Form {
+  id: Float!
+  title: String!
+  class_teacher: User!
+  subjects: [Subject!]!
 }
 
 type Query {
   rooms: [Room!]!
   getRoom(id: Int!): Room!
-  users: [User!]!
   user(id: Int!): User!
   roles: [Role!]!
   role(id: Int!): Role!
+  forms: [Form!]!
+  form(id: Int!): Form!
+  subjects: [Subject!]!
+  subject(id: Int!): Subject!
+  lessons: [Lesson!]!
+  lesson(id: Int!): Lesson!
 }
 
 type Mutation {
   createRoom(createRoomInput: CreateRoomInput!): Room!
-  createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  removeRole(id: Int!): Role!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   signup(signupUserInput: SignupUserInput!): SignUpResponse!
-  createRole(createRoleInput: CreateRoleInput!): Role!
-  updateRole(updateRoleInput: UpdateRoleInput!): Role!
-  removeRole(id: Int!): Role!
+  createForm(createFormInput: CreateFormInput!): Form!
+  removeForm(id: Int!): Form!
+  createSubject(createSubjectInput: CreateSubjectInput!): Subject!
+  removeSubject(id: Int!): Subject!
+  createLesson(createLessonInput: CreateLessonInput!): Lesson!
+  removeLesson(id: Int!): Lesson!
 }
 
 input CreateRoomInput {
@@ -59,14 +98,16 @@ input CreateRoomInput {
   ownerId: Int!
 }
 
-input CreateUserInput {
-  username: String!
-  password: String!
-}
-
 input UpdateUserInput {
   username: String
+  first_name: String
+  second_name: String
+  patronymic: String
   password: String
+}
+
+input CreateRoleInput {
+  title: String!
 }
 
 input LoginUserInput {
@@ -76,16 +117,21 @@ input LoginUserInput {
 
 input SignupUserInput {
   username: String!
+  first_name: String!
+  second_name: String!
+  patronymic: String!
   password: String!
 }
 
-input CreateRoleInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+input CreateFormInput {
+  title: String!
 }
 
-input UpdateRoleInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+input CreateSubjectInput {
+  title: String!
+}
+
+input CreateLessonInput {
+  title: String!
+  teacherId: Int!
 }

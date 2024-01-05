@@ -6,5 +6,14 @@ export class SignupUserInput {
   username: string;
 
   @Field()
+  first_name: string;
+
+  @Field()
+  second_name: string;
+
+  @Field()
+  patronymic: string;
+
+  @Field()
   password: string;
 }
