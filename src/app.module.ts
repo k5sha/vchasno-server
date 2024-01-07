@@ -1,7 +1,6 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { RoomsModule } from './rooms/rooms.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
@@ -10,10 +9,10 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { RequestLoggerMiddleware } from './middleware/request-logger.middleware';
-import { RolesModule } from './roles/roles.module';
 import { FormsModule } from './forms/forms.module';
 import { SubjectsModule } from './subjects/subjects.module';
 import { LessonsModule } from './lessons/lessons.module';
+import { ThemesModule } from './themes/themes.module';
 
 @Module({
   imports: [
@@ -31,13 +30,12 @@ import { LessonsModule } from './lessons/lessons.module';
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    RoomsModule,
     UsersModule,
     AuthModule,
-    RolesModule,
     FormsModule,
     SubjectsModule,
     LessonsModule,
+    ThemesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

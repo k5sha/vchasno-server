@@ -23,6 +23,7 @@ export class SubjectsService {
 
     return this.subjectRepository.save(newSubject);
   }
+
   findAll(): Promise<Subject[]> {
     return this.subjectRepository.find();
   }

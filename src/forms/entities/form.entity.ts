@@ -4,6 +4,7 @@ import { User } from 'src/users/entities/user.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   OneToOne,
@@ -21,13 +22,13 @@ export class Form {
   @Field()
   title: string;
 
-  @Field()
-  @OneToOne(() => User)
-  @Field(() => User)
+  @OneToOne(() => User, { eager: true })
+  @Field(() => User, { nullable: true })
+  @JoinColumn()
   class_teacher: User;
 
+  @ManyToMany(() => Subject, { eager: true })
   @Field(() => [Subject])
-  @ManyToMany(() => Subject)
   @JoinTable()
   subjects: Subject[];
 }

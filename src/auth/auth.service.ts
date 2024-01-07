@@ -35,7 +35,8 @@ export class AuthService {
     return await this.jwtService.sign({
       sub: user.id,
       username: user.username,
-      roles: user.roles,
+      student: user.student || null,
+      teacher: user.teacher || null,
     });
   }
 

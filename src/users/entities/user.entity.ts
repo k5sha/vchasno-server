@@ -1,17 +1,14 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { Room } from 'src/rooms/room.entity';
 import {
   Column,
   Entity,
-  JoinTable,
-  ManyToMany,
-  OneToMany,
+  JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { userInfo } from './userInfo.entity';
-import { Role } from 'src/roles/entities/role.entity';
-import { Lesson } from 'src/lessons/entities/lesson.entity';
+import { Teacher } from './teacher.entity';
+import { Student } from './student.entity';
 
 @Entity()
 @ObjectType()
@@ -44,16 +41,13 @@ export class User {
   @Field(() => userInfo, { nullable: true })
   userInfo: userInfo;
 
-  @ManyToMany(() => Role, { eager: true })
-  @Field(() => [Role])
-  @JoinTable()
-  roles: Role[];
+  @OneToOne(() => Teacher, { nullable: true, eager: true })
+  @Field(() => Teacher, { nullable: true })
+  @JoinColumn()
+  teacher: Teacher;
 
-  @OneToMany(() => Room, (room) => room.owner, { eager: true })
-  @Field(() => [Room], { nullable: true })
-  rooms?: Room[];
-
-  @OneToMany(() => Lesson, (lesson) => lesson.teacher, { eager: true })
-  @Field(() => [Lesson], { nullable: true })
-  lessons?: Lesson[];
+  @OneToOne(() => Student, { nullable: true, eager: true })
+  @Field(() => Student, { nullable: true })
+  @JoinColumn()
+  student: Student;
 }
