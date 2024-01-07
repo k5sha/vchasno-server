@@ -27,4 +27,9 @@ export class CreateUserInput {
   @IsString()
   @Field()
   password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @Field({ defaultValue: 'STUDENT' })
+  type?: 'STUDENT' | 'TEACHER';
 }

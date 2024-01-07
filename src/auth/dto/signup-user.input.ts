@@ -16,4 +16,7 @@ export class SignupUserInput {
 
   @Field()
   password: string;
+
+  @Field({ defaultValue: 'STUDENT' })
+  type?: 'STUDENT' | 'TEACHER';
 }
