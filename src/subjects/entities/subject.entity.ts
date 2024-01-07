@@ -1,12 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { User } from 'src/users/entities/user.entity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -18,9 +11,4 @@ export class Subject {
   @Column()
   @Field()
   title: string;
-
-  @Field(() => [User], { nullable: true })
-  @ManyToMany(() => User)
-  @JoinTable()
-  teachers: User[];
 }

@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { User } from 'src/users/entities/user.entity';
+import { Teacher } from 'src/users/entities/teacher.entity';
+
 import {
   Column,
   CreateDateColumn,
@@ -25,9 +26,9 @@ export class Lesson {
   @Field(() => Int)
   teacherId: number;
 
-  @Field(() => User)
-  @ManyToOne(() => User, (user) => user.lessons)
-  teacher: User;
+  @Field(() => Teacher)
+  @ManyToOne(() => Teacher, (teacher) => teacher.lessons)
+  teacher: Teacher;
 
   @CreateDateColumn()
   created_at: Date;
