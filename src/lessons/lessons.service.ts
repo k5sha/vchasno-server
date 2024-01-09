@@ -24,7 +24,7 @@ export class LessonsService {
     const lesson = await this.lessonRepository.findOne({
       where: {
         title: createLessonInput.title,
-        teacherId: createLessonInput.teacherId,
+        teacher,
       },
     });
 

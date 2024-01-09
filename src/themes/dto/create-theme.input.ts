@@ -1,7 +1,21 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsNumber, IsString } from 'class-validator';
 
 @InputType()
 export class CreateThemeInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @IsString()
+  @Field()
+  title: string;
+
+  @IsNumber()
+  @Field()
+  subjectId: number;
+
+  @IsNumber()
+  @Field()
+  formId: number;
+
+  @IsNumber()
+  @Field()
+  teacherId: number;
 }

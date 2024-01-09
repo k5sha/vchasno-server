@@ -6,21 +6,38 @@ type userInfo {
   id: Float!
 }
 
-type Lesson {
-  id: Float!
-  title: String!
-  teacherId: Int!
-  teacher: Teacher!
-}
-
 type Subject {
   id: Float!
   title: String!
 }
 
+type Form {
+  id: Float!
+  title: String!
+  class_teacher: User
+  subjects: [Subject!]!
+}
+
+type Theme {
+  id: Float!
+  title: String!
+  lessons: [Lesson!]
+  subject: Subject!
+  form: Form!
+  teacher: Teacher!
+}
+
+type Lesson {
+  id: Float!
+  title: String!
+  teacher: Teacher!
+  theme: Theme!
+}
+
 type Teacher {
   id: Float!
   lessons: [Lesson!]
+  themes: [Theme!]
   subjects: [Subject!]!
 }
 
@@ -50,28 +67,10 @@ type SignUpResponse {
   user: User!
 }
 
-type Form {
-  id: Float!
-  title: String!
-  class_teacher: User
-  subjects: [Subject!]!
-}
-
-type Theme {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type Query {
   user(id: Int!): User!
   subjects: [Subject!]!
   subject(id: Int!): Subject!
-  forms: [Form!]!
-  form(id: Int!): Form!
-  lessons: [Lesson!]!
-  lesson(id: Int!): Lesson!
-  themes: [Theme!]!
-  theme(id: Int!): Theme!
 }
 
 type Mutation {
@@ -82,16 +81,6 @@ type Mutation {
   removeSubject(id: Int!): Subject!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   signup(signupUserInput: SignupUserInput!): SignUpResponse!
-  createForm(createFormInput: CreateFormInput!): Form!
-  setClassTeacher(setClassTeacherFormInput: SetClassTeacherFormInput!): Form!
-  deleteClassTeacher(deleteClassTeacherFormInput: DeleteClassTeacherFormInput!): Form!
-  addSubjectToForm(addSubjectToFormInput: AddSubjectToFormInput!): Form!
-  removeForm(id: Int!): Form!
-  createLesson(createLessonInput: CreateLessonInput!): Lesson!
-  removeLesson(id: Int!): Lesson!
-  createTheme(createThemeInput: CreateThemeInput!): Theme!
-  updateTheme(updateThemeInput: UpdateThemeInput!): Theme!
-  removeTheme(id: Int!): Theme!
 }
 
 input AddSubjectInput {
@@ -124,39 +113,4 @@ input SignupUserInput {
   patronymic: String!
   password: String!
   type: String! = "STUDENT"
-}
-
-input CreateFormInput {
-  title: String!
-}
-
-input SetClassTeacherFormInput {
-  formId: Float!
-  teacherId: Float!
-}
-
-input DeleteClassTeacherFormInput {
-  formId: Float!
-  teacherId: Float!
-}
-
-input AddSubjectToFormInput {
-  formId: Float!
-  subjectId: Float!
-}
-
-input CreateLessonInput {
-  title: String!
-  teacherId: Int!
-}
-
-input CreateThemeInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateThemeInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
 }
