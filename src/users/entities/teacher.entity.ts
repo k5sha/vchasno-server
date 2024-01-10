@@ -26,7 +26,7 @@ export class Teacher {
   themes?: Theme[];
 
   @ManyToMany(() => Subject, { eager: true })
-  @Field(() => [Subject])
+  @Field(() => [Subject], { nullable: true })
   @JoinTable()
-  subjects: Subject[];
+  subjects?: Subject[];
 }

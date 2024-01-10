@@ -26,11 +26,11 @@ export class Theme {
   @Field(() => [Lesson], { nullable: true })
   lessons?: Lesson[];
 
-  @ManyToOne(() => Subject, { eager: true })
+  @ManyToOne(() => Subject)
   @Field(() => Subject)
   subject: Subject;
 
-  @ManyToOne(() => Form, { eager: true })
+  @ManyToOne(() => Form)
   @Field(() => Form)
   form: Form;
 
