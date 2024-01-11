@@ -2,7 +2,7 @@ import { ObjectType, Field } from '@nestjs/graphql';
 import { Form } from 'src/forms/entities/form.entity';
 import { Lesson } from 'src/lessons/entities/lesson.entity';
 import { Subject } from 'src/subjects/entities/subject.entity';
-import { Teacher } from 'src/users/entities/teacher.entity';
+import { Teacher } from 'src/teachers/entities/teacher.entity';
 import {
   Column,
   Entity,
@@ -26,15 +26,15 @@ export class Theme {
   @Field(() => [Lesson], { nullable: true })
   lessons?: Lesson[];
 
-  @ManyToOne(() => Subject)
+  @ManyToOne(() => Subject, { cascade: true })
   @Field(() => Subject)
   subject: Subject;
 
-  @ManyToOne(() => Form)
+  @ManyToOne(() => Form, { cascade: true })
   @Field(() => Form)
   form: Form;
 
-  @ManyToOne(() => Teacher, (teacher) => teacher.themes)
+  @ManyToOne(() => Teacher, (teacher) => teacher.themes, { cascade: true })
   @Field(() => Teacher)
   teacher: Teacher;
 }

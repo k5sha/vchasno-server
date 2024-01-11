@@ -6,15 +6,15 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { SubjectsService } from 'src/subjects/subjects.service';
 import { AddSubjectInput } from './dto/addSubject-user.input';
-import { Teacher } from './entities/teacher.entity';
-import { Student } from './entities/student.entity';
+import { TeachersService } from '../teachers/teachers.service';
+import { StudentsService } from '../students/students.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
-    @InjectRepository(Teacher) private teacherRepository: Repository<Teacher>,
-    @InjectRepository(Student) private studentRepository: Repository<Student>,
+    private teachersService: TeachersService,
+    private studentsService: StudentsService,
     private subjectsService: SubjectsService,
   ) {}
 
@@ -22,15 +22,11 @@ export class UsersService {
     const newUser = this.userRepository.create(createUserInput);
 
     if (createUserInput.type == 'TEACHER') {
-      const teacherAccount = this.teacherRepository.create();
-
-      await this.teacherRepository.save(teacherAccount);
+      const teacherAccount = await this.teachersService.create();
 
       newUser.teacher = teacherAccount;
     } else {
-      const studentAccount = this.studentRepository.create();
-
-      await this.studentRepository.save(studentAccount);
+      const studentAccount = await this.studentsService.create();
 
       newUser.student = studentAccount;
     }

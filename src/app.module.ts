@@ -13,6 +13,8 @@ import { FormsModule } from './forms/forms.module';
 import { SubjectsModule } from './subjects/subjects.module';
 import { LessonsModule } from './lessons/lessons.module';
 import { ThemesModule } from './themes/themes.module';
+import { TeachersModule } from './teachers/teachers.module';
+import { StudentsModule } from './students/students.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { ThemesModule } from './themes/themes.module';
     SubjectsModule,
     LessonsModule,
     ThemesModule,
+    TeachersModule,
+    StudentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -4,11 +4,16 @@ import { UsersResolver } from './users.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { SubjectsModule } from 'src/subjects/subjects.module';
-import { Teacher } from './entities/teacher.entity';
-import { Student } from './entities/student.entity';
+import { TeachersModule } from 'src/teachers/teachers.module';
+import { StudentsModule } from 'src/students/students.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Teacher, Student]), SubjectsModule],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    SubjectsModule,
+    TeachersModule,
+    StudentsModule,
+  ],
   providers: [UsersResolver, UsersService],
   exports: [UsersService],
 })

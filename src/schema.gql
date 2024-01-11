@@ -31,7 +31,7 @@ type Lesson {
   id: Float!
   title: String!
   teacher: Teacher!
-  theme: Theme!
+  theme: Theme
 }
 
 type Teacher {
@@ -71,6 +71,8 @@ type Query {
   user(id: Int!): User!
   subjects: [Subject!]!
   subject(id: Int!): Subject!
+  teacher(id: Int!): Teacher!
+  student(id: Int!): Student!
   forms: [Form!]!
   form(id: Int!): Form!
   lessons: [Lesson!]!
@@ -152,6 +154,7 @@ input AddSubjectToFormInput {
 input CreateLessonInput {
   title: String!
   teacherId: Int!
+  themeId: Int! = 0
 }
 
 input CreateThemeInput {
