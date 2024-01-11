@@ -2,7 +2,6 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ThemesService } from './themes.service';
 import { Theme } from './entities/theme.entity';
 import { CreateThemeInput } from './dto/create-theme.input';
-import { UpdateThemeInput } from './dto/update-theme.input';
 
 @Resolver(() => Theme)
 export class ThemesResolver {
@@ -21,11 +20,6 @@ export class ThemesResolver {
   @Query(() => Theme, { name: 'theme' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.themesService.findOne(id);
-  }
-
-  @Mutation(() => Theme)
-  updateTheme(@Args('updateThemeInput') updateThemeInput: UpdateThemeInput) {
-    return this.themesService.update(updateThemeInput.id, updateThemeInput);
   }
 
   @Mutation(() => Theme)

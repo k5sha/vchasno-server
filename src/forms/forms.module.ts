@@ -15,5 +15,6 @@ import { UsersModule } from 'src/users/users.module';
     UsersModule,
   ],
   providers: [FormsResolver, FormsService],
+  exports: [FormsService],
 })
 export class FormsModule {}

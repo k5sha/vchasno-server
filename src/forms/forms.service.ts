@@ -9,6 +9,7 @@ import { UsersService } from '../users/users.service';
 import { SetClassTeacherFormInput } from './dto/setTeacher-form.input';
 import { DeleteClassTeacherFormInput } from './dto/deleteTeacher-form.input copy';
 
+// TODO: Fix teacher entity/ Reaplace user to teacher
 @Injectable()
 export class FormsService {
   constructor(
