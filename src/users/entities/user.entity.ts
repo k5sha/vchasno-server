@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { userInfo } from './userInfo.entity';
-import { Teacher } from './teacher.entity';
-import { Student } from './student.entity';
+import { Teacher } from '../../teachers/entities/teacher.entity';
+import { Student } from '../../students/entities/student.entity';
 
 @Entity()
 @ObjectType()

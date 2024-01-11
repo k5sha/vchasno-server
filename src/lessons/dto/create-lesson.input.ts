@@ -10,4 +10,8 @@ export class CreateLessonInput {
   @IsNumber()
   @Field(() => Int)
   teacherId: number;
+
+  @IsNumber()
+  @Field(() => Int, { defaultValue: 0 })
+  themeId?: number;
 }

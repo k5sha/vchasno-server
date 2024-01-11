@@ -3,17 +3,19 @@ import { CreateLessonInput } from './dto/create-lesson.input';
 import { Lesson } from './entities/lesson.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UsersService } from 'src/users/users.service';
+import { ThemesService } from '../themes/themes.service';
+import { TeachersService } from '../teachers/teachers.service';
 
 @Injectable()
 export class LessonsService {
   constructor(
     @InjectRepository(Lesson) private lessonRepository: Repository<Lesson>,
-    private usersService: UsersService,
+    private teachersService: TeachersService,
+    private themesService: ThemesService,
   ) {}
 
   async create(createLessonInput: CreateLessonInput): Promise<Lesson> {
-    const teacher = await this.usersService.findOneById(
+    const teacher = await this.teachersService.findOne(
       createLessonInput.teacherId,
     );
 
@@ -24,7 +26,7 @@ export class LessonsService {
     const lesson = await this.lessonRepository.findOne({
       where: {
         title: createLessonInput.title,
-        teacherId: createLessonInput.teacherId,
+        teacher,
       },
     });
 
@@ -34,15 +36,36 @@ export class LessonsService {
 
     const newLesson = this.lessonRepository.create(createLessonInput);
 
+    newLesson.teacher = teacher;
+
+    if (createLessonInput.themeId != 0) {
+      const theme = await this.themesService.findOne(createLessonInput.themeId);
+
+      if (!theme) {
+        throw new Error('Theme not exist');
+      }
+
+      newLesson.theme = theme;
+    }
+
     return this.lessonRepository.save(newLesson);
   }
   findAll(): Promise<Lesson[]> {
-    return this.lessonRepository.find();
+    return this.lessonRepository.find({
+      relations: {
+        teacher: true,
+        theme: true,
+      },
+    });
   }
 
   findOne(id: number): Promise<Lesson> {
     return this.lessonRepository.findOne({
       where: { id },
+      relations: {
+        teacher: true,
+        theme: true,
+      },
     });
   }
 

@@ -6,22 +6,39 @@ type userInfo {
   id: Float!
 }
 
-type Lesson {
-  id: Float!
-  title: String!
-  teacherId: Int!
-  teacher: Teacher!
-}
-
 type Subject {
   id: Float!
   title: String!
 }
 
+type Form {
+  id: Float!
+  title: String!
+  class_teacher: User
+  subjects: [Subject!]!
+}
+
+type Theme {
+  id: Float!
+  title: String!
+  lessons: [Lesson!]
+  subject: Subject!
+  form: Form!
+  teacher: Teacher!
+}
+
+type Lesson {
+  id: Float!
+  title: String!
+  teacher: Teacher!
+  theme: Theme
+}
+
 type Teacher {
   id: Float!
   lessons: [Lesson!]
-  subjects: [Subject!]!
+  themes: [Theme!]
+  subjects: [Subject!]
 }
 
 type Student {
@@ -50,22 +67,12 @@ type SignUpResponse {
   user: User!
 }
 
-type Form {
-  id: Float!
-  title: String!
-  class_teacher: User
-  subjects: [Subject!]!
-}
-
-type Theme {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type Query {
   user(id: Int!): User!
   subjects: [Subject!]!
   subject(id: Int!): Subject!
+  teacher(id: Int!): Teacher!
+  student(id: Int!): Student!
   forms: [Form!]!
   form(id: Int!): Form!
   lessons: [Lesson!]!
@@ -90,7 +97,6 @@ type Mutation {
   createLesson(createLessonInput: CreateLessonInput!): Lesson!
   removeLesson(id: Int!): Lesson!
   createTheme(createThemeInput: CreateThemeInput!): Theme!
-  updateTheme(updateThemeInput: UpdateThemeInput!): Theme!
   removeTheme(id: Int!): Theme!
 }
 
@@ -148,15 +154,12 @@ input AddSubjectToFormInput {
 input CreateLessonInput {
   title: String!
   teacherId: Int!
+  themeId: Int! = 0
 }
 
 input CreateThemeInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateThemeInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  title: String!
+  subjectId: Float!
+  formId: Float!
+  teacherId: Float!
 }
