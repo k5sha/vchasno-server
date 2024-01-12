@@ -34,19 +34,23 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
-  findAll() {
-    return this.userRepository.find();
-  }
-
   findOneById(id: number) {
     return this.userRepository.findOne({
       where: { id },
+      relations: {
+        teacher: true,
+        student: true,
+      },
     });
   }
 
   findOneByUsername(username: string) {
     return this.userRepository.findOne({
       where: { username },
+      relations: {
+        teacher: true,
+        student: true,
+      },
     });
   }
 

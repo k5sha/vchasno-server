@@ -4,11 +4,13 @@ import {
   JoinTable,
   ManyToMany,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Lesson } from 'src/lessons/entities/lesson.entity';
 import { Subject } from 'src/subjects/entities/subject.entity';
 import { Theme } from 'src/themes/entities/theme.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity()
 @ObjectType()
@@ -29,4 +31,8 @@ export class Teacher {
   @Field(() => [Subject], { nullable: true })
   @JoinTable()
   subjects?: Subject[];
+
+  @OneToOne(() => User, (user) => user.teacher, { eager: true })
+  @Field(() => User)
+  user: User;
 }

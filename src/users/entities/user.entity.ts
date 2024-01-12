@@ -41,13 +41,13 @@ export class User {
   @Field(() => userInfo, { nullable: true })
   userInfo: userInfo;
 
-  @OneToOne(() => Teacher, { nullable: true, eager: true })
+  @OneToOne(() => Teacher, { nullable: true, cascade: true })
   @Field(() => Teacher, { nullable: true })
   @JoinColumn()
-  teacher: Teacher;
+  teacher?: Teacher;
 
-  @OneToOne(() => Student, { nullable: true, eager: true })
+  @OneToOne(() => Student, { nullable: true, cascade: true })
   @Field(() => Student, { nullable: true })
   @JoinColumn()
-  student: Student;
+  student?: Student;
 }

@@ -14,7 +14,7 @@ type Subject {
 type Form {
   id: Float!
   title: String!
-  class_teacher: User
+  class_teacher: Teacher
   subjects: [Subject!]!
 }
 
@@ -39,10 +39,12 @@ type Teacher {
   lessons: [Lesson!]
   themes: [Theme!]
   subjects: [Subject!]
+  user: User!
 }
 
 type Student {
   id: Float!
+  user: User!
 }
 
 type User {
