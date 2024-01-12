@@ -1,6 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Subject } from 'src/subjects/entities/subject.entity';
-import { User } from 'src/users/entities/user.entity';
+import { Teacher } from 'src/teachers/entities/teacher.entity';
 import {
   Column,
   Entity,
@@ -22,10 +22,10 @@ export class Form {
   @Field()
   title: string;
 
-  @OneToOne(() => User, { eager: true })
-  @Field(() => User, { nullable: true })
+  @OneToOne(() => Teacher, { eager: true })
+  @Field(() => Teacher, { nullable: true })
   @JoinColumn()
-  class_teacher: User;
+  class_teacher: Teacher;
 
   @ManyToMany(() => Subject, { eager: true })
   @Field(() => [Subject])
