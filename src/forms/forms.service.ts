@@ -5,17 +5,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AddSubjectToFormInput } from './dto/addSubject-form.input';
 import { SubjectsService } from 'src/subjects/subjects.service';
-import { UsersService } from '../users/users.service';
 import { SetClassTeacherFormInput } from './dto/setTeacher-form.input';
 import { DeleteClassTeacherFormInput } from './dto/deleteTeacher-form.input copy';
+import { TeachersService } from 'src/teachers/teachers.service';
 
-// TODO: Fix teacher entity/ Reaplace user to teacher
 @Injectable()
 export class FormsService {
   constructor(
     @InjectRepository(Form) private formRepository: Repository<Form>,
     private subjectsService: SubjectsService,
-    private usersService: UsersService,
+    private teachersService: TeachersService,
   ) {}
 
   async create(createFormInput: CreateFormInput): Promise<Form> {
@@ -57,7 +56,7 @@ export class FormsService {
       throw new Error('Teacher already deleted or teacher id incorrect!');
     }
 
-    const teacher = await this.usersService.findOneById(
+    const teacher = await this.teachersService.findOne(
       deleteClassTeacherFormInput.teacherId,
     );
 
@@ -84,7 +83,7 @@ export class FormsService {
       throw new Error('Teacher already set!');
     }
 
-    const teacher = await this.usersService.findOneById(
+    const teacher = await this.teachersService.findOne(
       setClassTeacherFormInput.teacherId,
     );
 
