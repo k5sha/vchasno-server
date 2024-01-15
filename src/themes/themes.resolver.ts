@@ -22,7 +22,7 @@ export class ThemesResolver {
     return this.themesService.findOne(id);
   }
 
-  @Mutation(() => Theme)
+  @Mutation(() => Number)
   removeTheme(@Args('id', { type: () => Int }) id: number) {
     return this.themesService.remove(id);
   }

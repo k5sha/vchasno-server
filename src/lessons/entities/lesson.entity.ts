@@ -22,6 +22,10 @@ export class Lesson {
   @Field()
   title: string;
 
+  @Column()
+  @Field()
+  date: Date;
+
   @Field(() => Teacher)
   @ManyToOne(() => Teacher, (teacher) => teacher.lessons)
   teacher: Teacher;

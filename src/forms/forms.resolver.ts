@@ -54,7 +54,7 @@ export class FormsResolver {
     return this.formsService.addSubjectToForm(addSubjectToFormInput);
   }
 
-  @Mutation(() => Form)
+  @Mutation(() => Number)
   removeForm(@Args('id', { type: () => Int }) id: number) {
     return this.formsService.remove(id);
   }
