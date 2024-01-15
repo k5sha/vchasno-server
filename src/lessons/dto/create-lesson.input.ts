@@ -1,5 +1,5 @@
 import { InputType, Field, Int } from '@nestjs/graphql';
-import { IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsNumber, IsString } from 'class-validator';
 
 @InputType()
 export class CreateLessonInput {
@@ -14,4 +14,8 @@ export class CreateLessonInput {
   @IsNumber()
   @Field(() => Int, { defaultValue: 0 })
   themeId?: number;
+
+  @IsDateString()
+  @Field(() => String)
+  date: string;
 }

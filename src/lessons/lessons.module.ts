@@ -9,5 +9,6 @@ import { TeachersModule } from 'src/teachers/teachers.module';
 @Module({
   imports: [TypeOrmModule.forFeature([Lesson]), TeachersModule, ThemesModule],
   providers: [LessonsResolver, LessonsService],
+  exports: [LessonsService],
 })
 export class LessonsModule {}

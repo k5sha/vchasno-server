@@ -35,7 +35,7 @@ export class LessonsService {
     }
 
     const newLesson = this.lessonRepository.create(createLessonInput);
-
+    newLesson.date = new Date(createLessonInput.date);
     newLesson.teacher = teacher;
 
     if (createLessonInput.themeId != 0) {

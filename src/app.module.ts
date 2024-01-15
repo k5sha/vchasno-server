@@ -15,6 +15,7 @@ import { LessonsModule } from './lessons/lessons.module';
 import { ThemesModule } from './themes/themes.module';
 import { TeachersModule } from './teachers/teachers.module';
 import { StudentsModule } from './students/students.module';
+import { MarksModule } from './marks/marks.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { StudentsModule } from './students/students.module';
     ThemesModule,
     TeachersModule,
     StudentsModule,
+    MarksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
