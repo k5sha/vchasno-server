@@ -24,7 +24,7 @@ export class LessonsResolver {
     return this.lessonsService.findOne(id);
   }
 
-  @Mutation(() => Lesson)
+  @Mutation(() => Number)
   removeLesson(@Args('id', { type: () => Int }) id: number) {
     return this.lessonsService.remove(id);
   }

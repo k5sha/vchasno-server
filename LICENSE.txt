@@ -1,6 +1,6 @@
 AFL-3.0
 This Academic Free License 3.0 applies to any original work of 
-authorship journal_server whose owner Yurii Yevtushenko has placed the 
+authorship "vchasno" whose owner Yurii Yevtushenko has placed the 
 following licensing notice adjacent to the copyright notice for the Original 
 Work:
 
