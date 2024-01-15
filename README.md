@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img alt="Static Badge" src="https://img.shields.io/badge/version-1.0.1--beta-blue">
+  <img alt="Static Badge" src="https://img.shields.io/badge/version-1.0.2--beta-blue">
   <img alt="Static Badge" src="https://img.shields.io/badge/node-v18.17.0-blueviolet">
   <img alt="Static Badge" src="https://img.shields.io/badge/npm-v9.8.1-green">
   <img alt="Static Badge" src="https://img.shields.io/badge/typescript-v5.1.3-blue">
