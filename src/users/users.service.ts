@@ -54,6 +54,7 @@ export class UsersService {
     });
   }
 
+  // TODO: Fix this function
   async addSubjectToTeacher(addSubjectInput: AddSubjectInput) {
     const user = await this.findOneById(addSubjectInput.teacherId);
 
