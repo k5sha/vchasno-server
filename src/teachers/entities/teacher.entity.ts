@@ -3,6 +3,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -11,6 +12,7 @@ import { Lesson } from 'src/lessons/entities/lesson.entity';
 import { Subject } from 'src/subjects/entities/subject.entity';
 import { Theme } from 'src/themes/entities/theme.entity';
 import { User } from 'src/users/entities/user.entity';
+import { School } from 'src/schools/entities/school.entity';
 
 @Entity()
 @ObjectType()
@@ -35,4 +37,8 @@ export class Teacher {
   @OneToOne(() => User, (user) => user.teacher, { eager: true })
   @Field(() => User)
   user: User;
+
+  @ManyToOne(() => School, (school) => school.teachers)
+  @Field(() => School)
+  school: School;
 }
