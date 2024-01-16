@@ -18,6 +18,7 @@ export class StudentsService {
   findOne(id: number): Promise<Student> {
     return this.studentRepository.findOne({
       where: { id },
+      relations: { school: true },
     });
   }
 }

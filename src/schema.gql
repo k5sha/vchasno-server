@@ -11,11 +11,37 @@ type Subject {
   title: String!
 }
 
+type Mark {
+  id: Float!
+  mark: Float!
+  student: Student!
+  teacher: Teacher!
+  form: Form!
+  subject: Subject!
+  lesson: Lesson!
+}
+
+type Student {
+  id: Float!
+  user: User!
+  marks: [Mark!]
+  school: School!
+}
+
+type School {
+  id: Float!
+  title: String!
+  students: [Student!]
+  teachers: [Teacher!]
+  forms: [Form!]
+}
+
 type Form {
   id: Float!
   title: String!
   class_teacher: Teacher
   subjects: [Subject!]!
+  school: School!
 }
 
 type Theme {
@@ -46,22 +72,7 @@ type Teacher {
   themes: [Theme!]
   subjects: [Subject!]
   user: User!
-}
-
-type Mark {
-  id: Float!
-  mark: Float!
-  student: Student!
-  teacher: Teacher!
-  form: Form!
-  subject: Subject!
-  lesson: Lesson!
-}
-
-type Student {
-  id: Float!
-  user: User!
-  marks: [Mark!]
+  school: School!
 }
 
 type User {
@@ -100,6 +111,8 @@ type Query {
   theme(id: Int!): Theme!
   marks: [Mark!]!
   mark(id: Int!): Mark!
+  schools: [School!]!
+  school(id: Int!): School!
 }
 
 type Mutation {
@@ -107,7 +120,7 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): Float!
   createSubject(createSubjectInput: CreateSubjectInput!): Subject!
-  removeSubject(id: Int!): Subject!
+  removeSubject(id: Int!): Float!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   signup(signupUserInput: SignupUserInput!): SignUpResponse!
   createForm(createFormInput: CreateFormInput!): Form!
@@ -121,6 +134,11 @@ type Mutation {
   removeTheme(id: Int!): Float!
   createMark(createMarkInput: CreateMarkInput!): Mark!
   removeMark(id: Int!): Float!
+  createSchool(createSchoolInput: CreateSchoolInput!): School!
+  addFormToSchool(addFormToSchoolInput: AddFormToSchoolInput!): School!
+  addTeacherToSchool(addTeacherToSchoolInput: AddTeacherToSchoolInput!): School!
+  addStudentToSchool(addStudentToSchoolInput: AddStudentToSchoolInput!): School!
+  removeSchool(id: Int!): Float!
 }
 
 input AddSubjectInput {
@@ -195,4 +213,23 @@ input CreateMarkInput {
   subjectId: Float!
   studentId: Float!
   teacherId: Float!
+}
+
+input CreateSchoolInput {
+  title: String!
+}
+
+input AddFormToSchoolInput {
+  formId: Float!
+  schoolId: Float!
+}
+
+input AddTeacherToSchoolInput {
+  teacherId: Float!
+  schoolId: Float!
+}
+
+input AddStudentToSchoolInput {
+  studentId: Float!
+  schoolId: Float!
 }

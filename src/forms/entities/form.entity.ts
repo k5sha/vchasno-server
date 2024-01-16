@@ -1,4 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
+import { School } from 'src/schools/entities/school.entity';
 import { Subject } from 'src/subjects/entities/subject.entity';
 import { Teacher } from 'src/teachers/entities/teacher.entity';
 import {
@@ -7,6 +8,7 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -31,4 +33,8 @@ export class Form {
   @Field(() => [Subject])
   @JoinTable()
   subjects: Subject[];
+
+  @ManyToOne(() => School, (school) => school.forms)
+  @Field(() => School)
+  school: School;
 }

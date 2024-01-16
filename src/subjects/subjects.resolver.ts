@@ -24,7 +24,7 @@ export class SubjectsResolver {
     return this.subjectsService.findOne(id);
   }
 
-  @Mutation(() => Subject)
+  @Mutation(() => Number)
   removeSubject(@Args('id', { type: () => Int }) id: number) {
     return this.subjectsService.remove(id);
   }
