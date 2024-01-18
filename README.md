@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="https://github.com/k5sha/vchasno-client" target="blank"><img src="https://raw.githubusercontent.com/k5sha/vchasno-client/a3ffb44993eaad92ec135645a644fe4b4553da64/public/logo2.svg" width="520" alt="Vchasno logo" /></a>
 </p>
 
 <p align="center">
