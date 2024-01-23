@@ -24,6 +24,7 @@ In the world of modern web development, creating a reliable and efficient server
 ```
 PORT=3000
 JWT_SECRET=SECRET
+UPLOADS_DIR=uploads
 ```
 
 ## Developers
