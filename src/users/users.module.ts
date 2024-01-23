@@ -6,6 +6,7 @@ import { User } from './entities/user.entity';
 import { SubjectsModule } from 'src/subjects/subjects.module';
 import { TeachersModule } from 'src/teachers/teachers.module';
 import { StudentsModule } from 'src/students/students.module';
+import { UserInfoModule } from 'src/user-info/user-info.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { StudentsModule } from 'src/students/students.module';
     SubjectsModule,
     TeachersModule,
     StudentsModule,
+    UserInfoModule,
   ],
   providers: [UsersResolver, UsersService],
   exports: [UsersService],

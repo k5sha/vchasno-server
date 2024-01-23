@@ -8,18 +8,24 @@ import { SubjectsService } from 'src/subjects/subjects.service';
 import { AddSubjectInput } from './dto/addSubject-user.input';
 import { TeachersService } from '../teachers/teachers.service';
 import { StudentsService } from '../students/students.service';
+import { UserInfoService } from '../user-info/user-info.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     private teachersService: TeachersService,
+    private userInfoService: UserInfoService,
     private studentsService: StudentsService,
     private subjectsService: SubjectsService,
   ) {}
 
   async create(createUserInput: CreateUserInput): Promise<User> {
     const newUser = this.userRepository.create(createUserInput);
+
+    const newUserInfo = await this.userInfoService.create();
+
+    newUser.userInfo = newUserInfo;
 
     if (createUserInput.type == 'TEACHER') {
       const teacherAccount = await this.teachersService.create();
@@ -30,7 +36,6 @@ export class UsersService {
 
       newUser.student = studentAccount;
     }
-
     return this.userRepository.save(newUser);
   }
 
@@ -40,6 +45,7 @@ export class UsersService {
       relations: {
         teacher: true,
         student: true,
+        userInfo: true,
       },
     });
   }
@@ -50,19 +56,20 @@ export class UsersService {
       relations: {
         teacher: true,
         student: true,
+        userInfo: true,
       },
     });
   }
 
   // TODO: Fix this function
   async addSubjectToTeacher(addSubjectInput: AddSubjectInput) {
-    const user = await this.findOneById(addSubjectInput.teacherId);
+    const teacher = await this.teachersService.findOne(
+      addSubjectInput.teacherId,
+    );
 
-    if (!user || !user.teacher) {
+    if (!teacher) {
       throw new Error('Teacher not exists!');
     }
-
-    const teacher = user.teacher;
 
     const subject = await this.subjectsService.findOne(
       addSubjectInput.subjectId,
@@ -82,6 +89,7 @@ export class UsersService {
 
     teacher.subjects.push(subject);
 
+    // TODO: FIX
     return this.userRepository.save(teacher);
   }
 
