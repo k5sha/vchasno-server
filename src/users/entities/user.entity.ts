@@ -6,7 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { userInfo } from './userInfo.entity';
+import { UserInfo } from '../../user-info/entities/userInfo.entity';
 import { Teacher } from '../../teachers/entities/teacher.entity';
 import { Student } from '../../students/entities/student.entity';
 
@@ -37,9 +37,10 @@ export class User {
   @Field()
   password: string;
 
-  @OneToOne(() => userInfo)
-  @Field(() => userInfo, { nullable: true })
-  userInfo: userInfo;
+  @OneToOne(() => UserInfo, { nullable: true, cascade: true })
+  @Field(() => UserInfo, { nullable: true })
+  @JoinColumn()
+  userInfo: UserInfo;
 
   @OneToOne(() => Teacher, { nullable: true, cascade: true })
   @Field(() => Teacher, { nullable: true })

@@ -17,6 +17,8 @@ import { TeachersModule } from './teachers/teachers.module';
 import { StudentsModule } from './students/students.module';
 import { MarksModule } from './marks/marks.module';
 import { SchoolsModule } from './schools/schools.module';
+import { UserInfoModule } from './user-info/user-info.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
@@ -27,6 +29,13 @@ import { SchoolsModule } from './schools/schools.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', `${process.env.UPLOADS_DIR}`),
+      serveStaticOptions: {
+        extensions: ['jpg', 'jpeg', 'png', 'gif'],
+        index: false,
+      },
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
@@ -44,6 +53,7 @@ import { SchoolsModule } from './schools/schools.module';
     StudentsModule,
     MarksModule,
     SchoolsModule,
+    UserInfoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
