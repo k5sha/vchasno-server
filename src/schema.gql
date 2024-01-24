@@ -167,7 +167,6 @@ input CreateSubjectInput {
 }
 
 input UpdateUserInfo {
-  id: Float!
   email: String
   phone: String
   image: Upload
