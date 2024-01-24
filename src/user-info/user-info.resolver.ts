@@ -1,7 +1,9 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, Context } from '@nestjs/graphql';
 import { UserInfoService } from './user-info.service';
 import { UserInfo } from './entities/userInfo.entity';
 import { UpdateUserInfo } from './dto/update-userInfo.input';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Resolver(() => UserInfo)
 export class UserInfoResolver {
@@ -12,9 +14,13 @@ export class UserInfoResolver {
     return this.userInfoService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => UserInfo)
-  updateUserInfo(@Args('updateUserInfo') updateUserInfo: UpdateUserInfo) {
-    return this.userInfoService.update(updateUserInfo.id, updateUserInfo);
+  updateUserInfo(
+    @Args('updateUserInfo') updateUserInfo: UpdateUserInfo,
+    @Context() context,
+  ) {
+    return this.userInfoService.update(context.req.user.userId, updateUserInfo);
   }
 
   @Mutation(() => UserInfo)

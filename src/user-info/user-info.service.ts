@@ -3,8 +3,9 @@ import { UserInfo } from './entities/userInfo.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { createWriteStream } from 'fs';
-import { join } from 'path';
+import { join, extname } from 'path';
 import { UpdateUserInfo } from './dto/update-userInfo.input';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class UserInfoService {
@@ -26,6 +27,9 @@ export class UserInfoService {
   }
 
   async update(id: number, updateUserInfo: UpdateUserInfo) {
+    if (!id) {
+      throw new Error('User info not exsist');
+    }
     const userInfo = await this.findOne(id);
     if (!userInfo) {
       throw new Error('User info not exsist');
@@ -33,13 +37,14 @@ export class UserInfoService {
 
     if (updateUserInfo.image) {
       const { createReadStream, filename } = await updateUserInfo.image;
+      const new_filename = `${uuidv4()}${extname(filename)}`;
       return new Promise(async (resolve) => {
         createReadStream()
           .pipe(
             createWriteStream(
               join(
                 process.cwd(),
-                `./${process.env.UPLOADS_DIR}/${Date.now()}_${filename}`,
+                `./${process.env.UPLOADS_DIR}/${new_filename}`,
               ),
             ),
           )
@@ -47,7 +52,7 @@ export class UserInfoService {
             return await this.userInfoRepository
               .update(id, {
                 ...updateUserInfo,
-                image: `${Date.now()}_${filename}`,
+                image: new_filename,
               })
               .then(async () => {
                 resolve(await this.findOne(id));
