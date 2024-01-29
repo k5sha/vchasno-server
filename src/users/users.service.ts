@@ -39,6 +39,17 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
+  findMe(id: number) {
+    return this.userRepository.findOne({
+      where: { id },
+      relations: {
+        teacher: true,
+        student: true,
+        userInfo: true,
+      },
+    });
+  }
+
   findOneById(id: number) {
     return this.userRepository.findOne({
       where: { id },
