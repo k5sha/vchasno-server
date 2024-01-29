@@ -10,7 +10,7 @@ export class UserInfo {
   id: number;
 
   @Field()
-  @Column({ default: '/default-avatar.png' })
+  @Column({ default: 'default-avatar.png' })
   image: string;
 
   @Field({ nullable: true })

@@ -6,7 +6,7 @@ import { createWriteStream } from 'fs';
 import { join, extname } from 'path';
 import { UpdateUserInfo } from './dto/update-userInfo.input';
 import { v4 as uuidv4 } from 'uuid';
-
+import * as fs from 'fs';
 @Injectable()
 export class UserInfoService {
   constructor(
@@ -55,6 +55,16 @@ export class UserInfoService {
                 image: new_filename,
               })
               .then(async () => {
+                if (userInfo.image != 'default-avatar.png')
+                  fs.rm(
+                    join(
+                      process.cwd(),
+                      `./${process.env.UPLOADS_DIR}/${userInfo.image}`,
+                    ),
+                    function (err) {
+                      if (err) return console.log(err);
+                    },
+                  );
                 resolve(await this.findOne(id));
               });
           })
