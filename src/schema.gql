@@ -103,6 +103,7 @@ type SignUpResponse {
 
 type Query {
   user(id: Int!): User!
+  me: User!
   subjects: [Subject!]!
   subject(id: Int!): Subject!
   teacher(id: Int!): Teacher!
