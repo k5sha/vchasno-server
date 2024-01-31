@@ -23,7 +23,7 @@ export class UsersService {
   async create(createUserInput: CreateUserInput): Promise<User> {
     const newUser = this.userRepository.create(createUserInput);
 
-    const newUserInfo = await this.userInfoService.create();
+    const newUserInfo = await this.userInfoService.create(createUserInput);
 
     newUser.userInfo = newUserInfo;
 

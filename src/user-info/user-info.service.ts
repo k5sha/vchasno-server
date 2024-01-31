@@ -7,6 +7,7 @@ import { join, extname } from 'path';
 import { UpdateUserInfo } from './dto/update-userInfo.input';
 import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'fs';
+import { CreateUserInfo } from './dto/create-userInfo.input';
 @Injectable()
 export class UserInfoService {
   constructor(
@@ -14,8 +15,8 @@ export class UserInfoService {
     private userInfoRepository: Repository<UserInfo>,
   ) {}
 
-  async create(): Promise<UserInfo> {
-    const newUserInfo = this.userInfoRepository.create();
+  async create(createUserInfo: CreateUserInfo): Promise<UserInfo> {
+    const newUserInfo = this.userInfoRepository.create(createUserInfo);
 
     return this.userInfoRepository.save(newUserInfo);
   }

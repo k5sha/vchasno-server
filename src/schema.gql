@@ -5,6 +5,9 @@
 type UserInfo {
   id: Float!
   image: String!
+  first_name: String!
+  second_name: String!
+  patronymic: String!
   phone: String
   email: String
   user: User!
@@ -81,9 +84,6 @@ type Teacher {
 
 type User {
   id: Float!
-  first_name: String!
-  second_name: String!
-  patronymic: String!
   username: String!
   password: String!
   userInfo: UserInfo
@@ -168,6 +168,9 @@ input CreateSubjectInput {
 }
 
 input UpdateUserInfo {
+  first_name: String!
+  second_name: String!
+  patronymic: String!
   email: String
   phone: String
   image: Upload
