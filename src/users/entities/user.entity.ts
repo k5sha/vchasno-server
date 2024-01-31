@@ -19,18 +19,6 @@ export class User {
 
   @Column()
   @Field()
-  first_name: string;
-
-  @Column()
-  @Field()
-  second_name: string;
-
-  @Column()
-  @Field()
-  patronymic: string;
-
-  @Column()
-  @Field()
   username: string;
 
   @Column()

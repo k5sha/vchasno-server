@@ -13,6 +13,18 @@ export class UserInfo {
   @Column({ default: 'default-avatar.png' })
   image: string;
 
+  @Column()
+  @Field()
+  first_name: string;
+
+  @Column()
+  @Field()
+  second_name: string;
+
+  @Column()
+  @Field()
+  patronymic: string;
+
   @Field({ nullable: true })
   @Column({ nullable: true })
   phone: string;
