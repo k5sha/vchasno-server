@@ -27,10 +27,16 @@ JWT_SECRET=SECRET
 UPLOADS_DIR=uploads
 ```
 
+### DB scheme
+<p align="center">
+  <a href="https://www.diagramsql.com/diagrams/35749ca1-f3e1-4753-a00f-b682273315c4" target="blank"><img src="https://i.imgur.com/9nNX9Kx.png" alt="db" /></a>
+</p>
+
+You can find all [here](https://www.diagramsql.com/diagrams/35749ca1-f3e1-4753-a00f-b682273315c4)
 ## Developers
 
 - [k5sha.](https://github.com/k5sha)
 
 ## License
 
-The journal-server is distributed under Academic Free License v3.0.
+The vchasno-server is distributed under Academic Free License v3.0.
