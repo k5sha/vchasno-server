@@ -32,7 +32,7 @@ UPLOADS_DIR=uploads
   <a href="https://i.imgur.com/9nNX9Kx.png" target="blank"><img src="https://i.imgur.com/9nNX9Kx.png" alt="db" /></a>
 </p>
 
-You can find all [here](https://www.diagramsql.com/diagrams/35749ca1-f3e1-4753-a00f-b682273315c4)
+You can find all [here](https://i.imgur.com/9nNX9Kx.png)
 ## Developers
 
 - [k5sha.](https://github.com/k5sha)
