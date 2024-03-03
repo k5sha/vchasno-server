@@ -29,7 +29,7 @@ UPLOADS_DIR=uploads
 
 ### DB scheme
 <p align="center">
-  <a href="https://www.diagramsql.com/diagrams/35749ca1-f3e1-4753-a00f-b682273315c4" target="blank"><img src="https://i.imgur.com/9nNX9Kx.png" alt="db" /></a>
+  <a href="https://i.imgur.com/9nNX9Kx.png" target="blank"><img src="https://i.imgur.com/9nNX9Kx.png" alt="db" /></a>
 </p>
 
 You can find all [here](https://www.diagramsql.com/diagrams/35749ca1-f3e1-4753-a00f-b682273315c4)
