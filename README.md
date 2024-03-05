@@ -19,6 +19,8 @@ In the world of modern web development, creating a reliable and efficient server
 
 ## Documentation
 
+[Manual & Plans](https://docs.google.com/document/d/1QLl_ZYgR-KUI_bQkqQsUpZUJDT0w3DWFnwsVuWYgt6k/edit?usp=sharing)
+
 ##### Example of .env
 
 ```
